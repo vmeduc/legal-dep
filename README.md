@@ -1,24 +1,17 @@
-# vue-cli-test2
+# legal-dep
+Клиентская часть веб приложения "Юридический портал". Используемые технологии: vue.js, typescript, vue-material-design.
 
-## Project setup
+## Для запуска проекта нужно сделать следующее:
+
+### Загрузка необходимых библиотек
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Локальный запуск в dev режиме
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
+### Дока
 See [Configuration Reference](https://cli.vuejs.org/config/).
