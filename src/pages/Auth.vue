@@ -65,9 +65,3 @@ export default class Auth extends Vue {
   }
 }
 </script>
-
-<style scoped>
-.md-card {
-  margin-top: 10%;
-}
-</style>

@@ -1,7 +1,8 @@
 # legal-dep
 Клиентская часть веб приложения "Юридический портал". Используемые технологии: vue.js, typescript, vue-material-design.
 
-## Для запуска проекта нужно сделать следующее:
+## Запуск проекта:
+Нужно выполнить две комманды:
 
 ### Загрузка необходимых библиотек
 ```
@@ -14,4 +15,4 @@ npm run serve
 ```
 
 ### Дока
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[Configuration Reference](https://cli.vuejs.org/config/).

@@ -40,6 +40,7 @@ export const auth: Module<AuthState, RootState> = {
         alert("Logout succes!");
       } catch (error) {
         alert("Logout error!\n".concat(error));
+        commit("authLogoutError");
       }
     },
   },
@@ -55,6 +56,11 @@ export const auth: Module<AuthState, RootState> = {
       localStorage.removeItem("token");
     },
     authLogout(state) {
+      state.token = null;
+      state.status = undefined;
+      localStorage.removeItem("token");
+    },
+    authLogoutError(state) {
       state.token = null;
       state.status = undefined;
       localStorage.removeItem("token");

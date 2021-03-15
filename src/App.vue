@@ -20,6 +20,9 @@ export default class App extends Vue {
 </script>
 
 <style>
+.md-card {
+  margin-top: 10%;
+}
 /* .stl {
   background-color: #f3ece5;
 }

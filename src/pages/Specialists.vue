@@ -1,6 +1,14 @@
 <template>
-  <div>
-    Specialists
+  <div class="md-layout">
+    <div class="md-layout-item"></div>
+    <div class="md-layout-item md-size-25">
+      <md-card>
+        <md-card-content>
+          <h2 style="text-align: center; color: red;">Specialists</h2>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div class="md-layout-item"></div>
   </div>
 </template>
 
