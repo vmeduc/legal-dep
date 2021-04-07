@@ -4,11 +4,12 @@ export interface AuthState {
 }
 
 export interface AuthRequest {
-  email?: string;
+  name?: string;
   password?: string;
 }
 
 export interface AuthResponse {
-  email: string;
+  role: string;
+  username: string;
   token: string;
 }

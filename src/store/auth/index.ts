@@ -14,13 +14,15 @@ export const state: AuthState = {
 export const auth: Module<AuthState, RootState> = {
   state,
   actions: {
-    async login({commit, dispatch}, user: AuthRequest) {
+    async login({commit}, user: AuthRequest) {
+      commit('setLoading', true);
       try {
         const response: AxiosResponse<AuthResponse> = await axios({
-          url: "http://localhost:9000/api/v1/auth/login", 
+          url: "api/v1/auth/login", 
           data: user, 
           method: "POST",
         });
+        console.log(response);
         commit("authSuccess", response.data.token);
         alert("Auth success!")
         return response;
@@ -28,19 +30,24 @@ export const auth: Module<AuthState, RootState> = {
         commit("authError");
         alert("Auth error!\n".concat(error.message));
         return error;
+      } finally {
+        commit('setLoading', false);
       }
     },
-    async logout({commit, dispatch}) {
+    async logout({commit}) {
+      commit('setLoading', true);
       try {
-        const response: AxiosResponse = await axios({
-          url: "http://localhost:9000/api/v1/auth/logout", 
-          method: "POST",
-        });
+        // const response: AxiosResponse = await axios({
+        //   url: "api/v1/auth/logout", 
+        //   method: "POST",
+        // });
         commit("authLogout");
         alert("Logout succes!");
       } catch (error) {
         alert("Logout error!\n".concat(error));
         commit("authLogoutError");
+      } finally {
+        commit('setLoading', false);
       }
     },
   },

@@ -13,8 +13,8 @@
             <div class="md-layout md-gutter">
               <div class="md-layout-item md-size-100">
                 <md-field>
-                  <label>Email</label>
-                  <md-input type="text" v-model="authParameters.email"></md-input>
+                  <label>Name</label>
+                  <md-input type="text" v-model="authParameters.name"></md-input>
 
                 </md-field>
               </div>
@@ -53,7 +53,7 @@ export default class Auth extends Vue {
   @Action("login") actionLogin: any;
 
   private authParameters: AuthRequest = {
-    email: undefined,
+    name: undefined,
     password: undefined,
   };
 
@@ -65,3 +65,9 @@ export default class Auth extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.md-card {
+  margin-top: 25%;
+}
+</style>

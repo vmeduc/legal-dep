@@ -1,11 +1,10 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = "http://localhost:8080/";
+axios.defaults.baseURL = "https://testserverv.herokuapp.com/";
 
 const token = localStorage.getItem("token");
 
 if (token) {
-  axios.defaults.headers.common["Authorization"] = token;
+  axios.defaults.headers.common["Authorization"] = "Bearer ".concat(token);
+  axios.defaults.headers.common["Content-Type"] = "application/json;charset=UTF-8";
 }
-
-console.log("axios.defaults.headers - ", axios.defaults.headers);
