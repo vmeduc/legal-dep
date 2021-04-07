@@ -37,6 +37,11 @@ const routes: Array<RouteConfig> = [
     name: 'Login',
     component: Auth,
   },
+  {
+    path: '/registration',
+    name: 'Registration',
+    component: Auth,
+  },
 ]
 
 const router = new VueRouter({

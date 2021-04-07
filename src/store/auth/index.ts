@@ -14,6 +14,23 @@ export const state: AuthState = {
 export const auth: Module<AuthState, RootState> = {
   state,
   actions: {
+    async registration({commit}, user) {
+      commit('setLoading', true);
+      try {
+        const response = await axios({
+          url: "api/v1/auth/registration",
+          data: user,
+          method: "POST",
+        });
+        console.log('resp - ', response);
+        return response;
+      } catch (err) {
+        
+        alert("Registration error");
+      } finally {
+        commit('setLoading', false);
+      }
+    },
     async login({commit}, user: AuthRequest) {
       commit('setLoading', true);
       try {
