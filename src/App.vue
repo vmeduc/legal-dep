@@ -30,7 +30,7 @@ export default class App extends Vue {
 
 <style>
 .md-card {
-  margin-top: 10%;
+  margin-top: 100px;
   margin-inline: 5%;
 
 }
