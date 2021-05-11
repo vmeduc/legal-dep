@@ -4,11 +4,9 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import VueMaterial from './config/vueMaterialConfig';
+import './config/vueMaterialConfig';
 import './config/axiosConfig';
 
-
-Vue.use(VueMaterial);
 
 Vue.config.productionTip = false;
 

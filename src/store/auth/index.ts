@@ -6,9 +6,12 @@ import axios, { AxiosResponse } from 'axios';
 // import { mutations } from './mutations';
 // import { getters } from './getters';
 
+import { User } from './types';
+
 export const state: AuthState = {
   token: localStorage.getItem("token"),
   status: localStorage.getItem("token") ? "success" : undefined,
+  user: undefined,
 };
 
 export const auth: Module<AuthState, RootState> = {
@@ -18,7 +21,7 @@ export const auth: Module<AuthState, RootState> = {
       commit('setLoading', true);
       try {
         const response = await axios({
-          url: "api/v1/auth/registration",
+          url: "/auth/register",
           data: user,
           method: "POST",
         });
@@ -35,12 +38,12 @@ export const auth: Module<AuthState, RootState> = {
       commit('setLoading', true);
       try {
         const response: AxiosResponse<AuthResponse> = await axios({
-          url: "api/v1/auth/login", 
+          url: "/auth/login", 
           data: user, 
           method: "POST",
         });
         console.log(response);
-        commit("authSuccess", response.data.token);
+        commit("authSuccess", response.data);
         alert("Auth success!")
         return response;
       } catch (error) {
@@ -55,7 +58,7 @@ export const auth: Module<AuthState, RootState> = {
       commit('setLoading', true);
       try {
         // const response: AxiosResponse = await axios({
-        //   url: "api/v1/auth/logout", 
+        //   url: "/auth/logout", 
         //   method: "POST",
         // });
         commit("authLogout");
@@ -69,11 +72,12 @@ export const auth: Module<AuthState, RootState> = {
     },
   },
   mutations: {
-    authSuccess(state, token: string) {
+    authSuccess(state, respData: AuthResponse) {
       state.status = "success";
-      state.token = token;
-      localStorage.setItem("token", token);
-      axios.defaults.headers.common["Authorization"] = token;
+      state.token = respData.token;
+      state.user = new User(respData.username);
+      localStorage.setItem("token", respData.token);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${respData.token}`;
     },
     authError(state) {
       state.status = "error";
@@ -98,5 +102,8 @@ export const auth: Module<AuthState, RootState> = {
 
       return (store.status === "success" && store.token) ? true : false;
     },
+    user(store) {
+      return store.user;
+    }
   }
 };

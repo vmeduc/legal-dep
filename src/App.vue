@@ -32,7 +32,9 @@ export default class App extends Vue {
 .md-card {
   margin-top: 100px;
   margin-inline: 5%;
-
+}
+.btn {
+  width: 120px;
 }
 /* .stl {
   background-color: #f3ece5;

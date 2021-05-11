@@ -16,16 +16,23 @@ export const legists: Module<LegistsState, RootState> = {
       commit("setLoading", true);
       try {
         const response: AxiosResponse<Legist> = await axios({
-          url: "/api/v1/users/getlegists",
+          url: "/users/getlegists",
           method: "GET",
         });
-        console.log("response - ", response);
-      } catch (err) {
-        let x = 1;
-        x = x - 1;
+        commit("setLegists", response.data);
       } finally {
         commit("setLoading", false);
       }
     },
+  },
+  mutations: {
+    setLegists(state, legists: Legist[]) {
+      state.legists = legists;
+    }
+  },
+  getters: {
+    legists(store): Legist[] {
+      return store.legists;
+    }
   },
 };

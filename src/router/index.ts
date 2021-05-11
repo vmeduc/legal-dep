@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 
 import Home from '../pages/Home.vue'
-import Specialists from '../pages/Specialists.vue'
+import Legists from '../pages/Legists.vue'
 import Chat from '../pages/Chat.vue';
 import Auth from '../pages/Auth.vue';
 import { permissionCheck } from './access';
@@ -21,9 +21,9 @@ const routes: Array<RouteConfig> = [
     component: Home,
   },
   {
-    path: '/specialists',
-    name: 'Specialists',
-    component: Specialists,
+    path: '/legists',
+    name: 'Legists',
+    component: Legists,
     beforeEnter: permissionCheck,
   },
   {

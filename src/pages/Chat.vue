@@ -11,7 +11,7 @@
                   <md-avatar>
                     <img src="../assets/eva.jpg" alt="Avatar">
                   </md-avatar>
-                  Specialist1
+                  legist 1
                 </div>
               </md-list-item>
               <md-list-item @click="some">
@@ -19,7 +19,7 @@
                   <md-avatar>
                     <img src="../assets/avatar.png" alt="Avatar">
                   </md-avatar>
-                  Specialist2
+                  legist 2
                 </div>
               </md-list-item>
               <md-list-item @click="some">
@@ -27,7 +27,7 @@
                   <md-avatar>
                     <img src="../assets/avatar-2.jpg" alt="Avatar">
                   </md-avatar>
-                  Specialist3
+                  legist 3
                 </div>
               </md-list-item>
               <md-list-item @click="some">
@@ -35,7 +35,7 @@
                   <md-avatar>
                     <img src="../assets/cat.jpg" alt="Avatar">
                   </md-avatar>
-                  Specialist4
+                  legist 4
                 </div>
               </md-list-item>
             </md-list>
@@ -66,7 +66,7 @@
                   <md-avatar>
                     <img src="../assets/eva.jpg" alt="Avatar">
                   </md-avatar>
-                  Specialist1
+                  legist 1
                 </div>
               </md-list-item>
               <md-list-item @click="some">
@@ -74,7 +74,7 @@
                   <md-avatar>
                     <img src="../assets/avatar.png" alt="Avatar">
                   </md-avatar>
-                  Specialist2
+                  legist 2
                 </div>
               </md-list-item>
               <md-list-item @click="some">
@@ -82,7 +82,7 @@
                   <md-avatar>
                     <img src="../assets/avatar-2.jpg" alt="Avatar">
                   </md-avatar>
-                  Specialist3
+                  legist 3
                 </div>
               </md-list-item>
               <md-list-item @click="some">
@@ -90,7 +90,7 @@
                   <md-avatar>
                     <img src="../assets/cat.jpg" alt="Avatar">
                   </md-avatar>
-                  Specialist4
+                  legist 4
                 </div>
               </md-list-item>
             </md-list>
