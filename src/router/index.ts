@@ -36,6 +36,13 @@ const routes: Array<RouteConfig> = [
     path: '/login',
     name: 'Login',
     component: Auth,
+    // beforeEnter: (to: any, from: any, next: any) => {
+    //   if (confirm('leave?')) {
+    //     next();
+    //   } else {
+    //     next(false);
+    //   }
+    // },
   },
   {
     path: '/registration',

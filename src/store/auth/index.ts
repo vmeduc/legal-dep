@@ -17,6 +17,14 @@ export const state: AuthState = {
 export const auth: Module<AuthState, RootState> = {
   state,
   actions: {
+    preAuth({commit}) {
+      const token = localStorage.getItem("token");
+      const userName = localStorage.getItem("userName");
+      if (token && userName) {
+        const obj: AuthResponse = {role: 'some role', token: token, username: userName};
+        commit("authSuccess", obj);
+      }
+    },
     async registration({commit}, user) {
       commit('setLoading', true);
       try {
@@ -42,7 +50,6 @@ export const auth: Module<AuthState, RootState> = {
           data: user, 
           method: "POST",
         });
-        console.log(response);
         commit("authSuccess", response.data);
         alert("Auth success!")
         return response;
@@ -77,30 +84,30 @@ export const auth: Module<AuthState, RootState> = {
       state.token = respData.token;
       state.user = new User(respData.username);
       localStorage.setItem("token", respData.token);
+      localStorage.setItem("userName", respData.username);
       axios.defaults.headers.common["Authorization"] = `Bearer ${respData.token}`;
     },
     authError(state) {
       state.status = "error";
       localStorage.removeItem("token");
+      localStorage.removeItem("userName");
     },
     authLogout(state) {
       state.token = null;
       state.status = undefined;
       localStorage.removeItem("token");
+      localStorage.removeItem("userName");
     },
     authLogoutError(state) {
       state.token = null;
       state.status = undefined;
       localStorage.removeItem("token");
+      localStorage.removeItem("userName");
     }
   },
   getters: {
     isAuthenticated(store) {
-      console.log("in isAuthenticated - ");
-      console.log("store.status - ", store.status);
-      console.log("store.token - ", store.token);
-
-      return (store.status === "success" && store.token) ? true : false;
+      return (store.status === "success" && store.token && store.user) ? true : false;
     },
     user(store) {
       return store.user;

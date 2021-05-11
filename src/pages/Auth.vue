@@ -94,10 +94,6 @@ export default class Auth extends Vue {
   @Action("login") actionLogin: any;
   @Action("registration") actionRegistration: any;
 
-  created() {
-    console.log(this.$route.fullPath);
-  }
-
   private requestParams: any = {
     name: undefined,
     password: undefined,

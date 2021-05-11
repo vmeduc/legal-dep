@@ -19,10 +19,11 @@ import { Action, Getter, Mutation } from "vuex-class";
 export default class App extends Vue {
   
   @Getter("isLoading") isLoading!: boolean;
-  
+
+  @Action("preAuth") actionPreAuth: any;
 
   created() {
-    return;
+    this.actionPreAuth();
   }
   
 }

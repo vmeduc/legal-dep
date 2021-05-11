@@ -18,8 +18,13 @@
         </template>
       </div>
       <div class="md-toolbar-section-end">
-        <div style="margin-right: 3%; color: green;">
-          <h3>{{ this.user ? this.user.name : '' }}</h3>
+        <div v-if="isAuth" style="color: green;">
+          <h3>{{ userName }}</h3>
+        </div>
+        <div v-if="isAuth" style="margin-right: 2%;">
+          <md-button class="md-icon-button">
+            <md-icon>person</md-icon>
+          </md-button>
         </div>
         <router-link v-if="isAuth" to="/login">
           <md-button class="md-icon-button" @click="exit()">
@@ -45,12 +50,12 @@ export default class Navigation extends Vue {
 
   @Action("logout") actionLogout: any;
 
-  exit() {
-    this.actionLogout();
+  get userName() {
+    return localStorage.getItem("userName");
   }
 
-  created() {
-    console.log(this.user);
+  exit() {
+    this.actionLogout();
   }
 }
 </script>
