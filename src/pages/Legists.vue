@@ -26,11 +26,8 @@ export default class Legists extends Vue {
 
   @Getter("legists") legistsList!: Legist[];
 
-
-
   created() {
     this.actionGetLegists();
   }
-
 }
 </script>

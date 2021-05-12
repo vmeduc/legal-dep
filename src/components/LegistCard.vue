@@ -12,18 +12,39 @@
     </md-card-header>
 
     <md-card-actions>
-      <md-button @click="active = true">Consultation</md-button>
-      <md-button>Chat</md-button>
+      <md-button @click="isDialogActive = true">Consultation</md-button>
+      <md-button @click="$router.push('/chat')">Chat</md-button>
     </md-card-actions>
 
     <md-dialog
-      :md-active.sync="active"
-      v-model="value"
+      :md-active.sync="isDialogActive"
     >
-      <md-field>
-        <label>Last name</label>
-        <md-input type="text" v-model="value"></md-input>
-      </md-field>
+      <div class="md-layout" style="margin: 4%;">
+        <div class="md-layout-item">
+          <md-field>
+            <md-icon>subject</md-icon>
+            <label>Subject</label>
+            <md-input type="text" v-model="value.subject"></md-input>
+          </md-field>
+        </div>
+        <div class="md-layout-item md-size-100">
+          <md-datepicker v-model="value.date">
+            <label>Date</label>
+          </md-datepicker>
+        </div>
+      </div>
+      <div class="md-layout" style="margin: 4%;">
+        <div class="md-layout md-alignment-top-left">
+          <md-button class="md-primary md-raised" @click="isDialogActive = false">
+            Close
+          </md-button>
+        </div>
+        <div class="md-layout md-alignment-top-right">
+          <md-button class="md-primary md-raised">
+            Submit
+          </md-button>
+        </div>
+      </div>
     </md-dialog>
 
   </md-card>
@@ -39,11 +60,12 @@ export default class LegistCard extends Vue {
 
   @Prop() legist!: Legist;
   
-  public active = false;
-  public value?: string = undefined;
+  isDialogActive = false;
+  value = {
+
+  };
 }
 </script>
 
-<style>
-
+<style scope>
 </style>

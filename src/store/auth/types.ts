@@ -16,17 +16,19 @@ export interface AuthResponse {
 }
 
 export class User {
-  id?: string;
+  id?: string|null = undefined;
   name: string;
-  firstName?: string;
-  lastName?: string;
-  // userPic?: null;
-  email?: string;
-  // gender?: string;
-  // locale?: string;
-  // status?: string;
-  // lastVisit?: string;
-  // roles?: string[];
+  firstName?: string|null = null;
+  lastName?: string|null = null;
+  email?: string|null = null;
+  gender?: string|null = null;
+  userPic: string|null = null;
+  locale?: string|null = null;
+  status?: string|null = null;
+  lastVisit?: string|null = null;
+  roles?: string[] = [];
+
+  password?: string = undefined;
 
   constructor(name: string) {
     this.name = name;

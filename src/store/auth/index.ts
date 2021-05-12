@@ -82,11 +82,11 @@ export const auth: Module<AuthState, RootState> = {
       const user: User = store.getters.user;
       commit('setLoading', true);
       try {
-        const response: AxiosResponse<any> = await axios({
+        const response: AxiosResponse<User> = await axios({
           url: "/users/getUser/byUsername/".concat(user.name), 
           method: "GET",
         });
-        
+        commit("setUser", response.data);
         return response;
       } finally {
         commit('setLoading', false);
@@ -118,7 +118,10 @@ export const auth: Module<AuthState, RootState> = {
       state.status = undefined;
       localStorage.removeItem("token");
       localStorage.removeItem("userName");
-    }
+    },
+    setUser(state, user: User) {
+      state.user = user;
+    },
   },
   getters: {
     isAuthenticated(store) {
