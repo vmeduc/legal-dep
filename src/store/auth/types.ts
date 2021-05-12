@@ -17,7 +17,7 @@ export interface AuthResponse {
 
 export class User {
   id?: string;
-  name?: string;
+  name: string;
   firstName?: string;
   lastName?: string;
   // userPic?: null;

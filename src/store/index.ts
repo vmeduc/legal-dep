@@ -22,6 +22,9 @@ const store: StoreOptions<RootState> = {
       return state.isLoading = value;
     },
   },
+  actions: {
+
+  },
 
   modules: {
     auth,

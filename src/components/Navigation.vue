@@ -7,7 +7,7 @@
         </span>
         <template v-if="isAuth">
           <router-link to="/">
-            <md-button>home</md-button>
+            <md-button>news</md-button>
           </router-link>
           <router-link to="/legists">
             <md-button>legists</md-button>
@@ -22,7 +22,7 @@
           <h3>{{ userName }}</h3>
         </div>
         <div v-if="isAuth" style="margin-right: 2%;">
-          <md-button class="md-icon-button">
+          <md-button class="md-icon-button" @click="$router.push('/profile')">
             <md-icon>person</md-icon>
           </md-button>
         </div>
@@ -51,7 +51,7 @@ export default class Navigation extends Vue {
   @Action("logout") actionLogout: any;
 
   get userName() {
-    return localStorage.getItem("userName");
+    return this.user ? this.user.name : 'none';
   }
 
   exit() {

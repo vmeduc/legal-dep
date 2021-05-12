@@ -4,7 +4,7 @@
     <div class="md-layout-item md-size-25">
       <md-card>
         <md-card-content>
-          <h2 style="text-align: center; color: green;">Home</h2>
+          <h2 style="text-align: center; color: green;">News</h2>
         </md-card-content>
       </md-card>
     </div>
@@ -17,7 +17,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 
 @Component
-export default class Home extends Vue {
+export default class News extends Vue {
 
 }
 </script>

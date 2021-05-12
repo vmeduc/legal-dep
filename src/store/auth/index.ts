@@ -7,6 +7,7 @@ import axios, { AxiosResponse } from 'axios';
 // import { getters } from './getters';
 
 import { User } from './types';
+import store from '..';
 
 export const state: AuthState = {
   token: localStorage.getItem("token"),
@@ -73,6 +74,20 @@ export const auth: Module<AuthState, RootState> = {
       } catch (error) {
         alert("Logout error!\n".concat(error));
         commit("authLogoutError");
+      } finally {
+        commit('setLoading', false);
+      }
+    },
+    async getUser({commit}) {
+      const user: User = store.getters.user;
+      commit('setLoading', true);
+      try {
+        const response: AxiosResponse<any> = await axios({
+          url: "/users/getUser/byUsername/".concat(user.name), 
+          method: "GET",
+        });
+        
+        return response;
       } finally {
         commit('setLoading', false);
       }
