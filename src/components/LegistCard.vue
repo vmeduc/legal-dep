@@ -28,9 +28,9 @@
           </md-field>
         </div>
         <div class="md-layout-item md-size-100">
-          <md-datepicker v-model="value.date">
+          <datetime v-model="value.date">
             <label>Date</label>
-          </md-datepicker>
+          </datetime>
         </div>
       </div>
       <div class="md-layout" style="margin: 4%;">
@@ -54,8 +54,9 @@
 import { Legist } from "@/store/legists/types";
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
-
-@Component
+import { Datetime } from "vue-datetime";
+ 
+@Component({ components: {Datetime} })
 export default class LegistCard extends Vue {
 
   @Prop() legist!: Legist;

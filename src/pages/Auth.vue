@@ -1,5 +1,5 @@
 <template>
-  <div class="md-layout">
+  <div class="md-layout m">
     <div class="md-layout-item"></div>
     <div class="md-layout-item md-size-25">
       <div class="md-layout md-gutter md-alignment-center">
@@ -123,5 +123,7 @@ export default class Auth extends Vue {
 </script>
 
 <style scoped>
-
+.m {
+  margin-top: 100px;
+}
 </style>
