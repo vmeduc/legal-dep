@@ -24,6 +24,21 @@ export const legists: Module<LegistsState, RootState> = {
         commit("setLoading", false);
       }
     },
+
+    async createRequest({commit}, request) {
+      commit("setLoading", true);
+      try {
+        const response: AxiosResponse<any> = await axios({
+          url: "/requests/create",
+          method: "POST",
+          data: request,
+        });
+        
+      } finally {
+        commit("setLoading", false);
+      }
+    },
+    
   },
   mutations: {
     setLegists(state, legists: Legist[]) {
