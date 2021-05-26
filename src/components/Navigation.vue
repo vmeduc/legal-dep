@@ -22,7 +22,7 @@
           <h3>{{ userName }}</h3>
         </div>
         <div v-if="isAuth" style="margin-right: 2%;">
-          <md-button class="md-icon-button" @click="$router.push('/profile')">
+          <md-button class="md-icon-button" @click="$router.push(`/profile/${userName}`)">
             <md-icon>person</md-icon>
           </md-button>
         </div>

@@ -5,7 +5,8 @@
       <md-card>
         <md-card-header>
           <md-card-header-text>
-            <div class="md-title">User profile</div>
+            <div v-if="isSelf" class="md-title">User profile</div>
+            <div v-else class="md-title">Legist profile</div>
           </md-card-header-text>
           <md-card-media md-medium>
             <img src="@/assets/default.jpg" alt="User picture">
@@ -63,12 +64,17 @@
             </div>
           </div>
         </md-card-content>
-        <md-card-actions md-alignment="space-between">
+        <md-card-actions v-if="isSelf" md-alignment="space-between">
           <md-button v-if="!isEditable" @click="isEditable = true">edit</md-button>
           <md-button v-if="isEditable" @click="isEditable = false">back</md-button>
           <md-button v-if="isEditable" @click="onClickSave">save</md-button>
         </md-card-actions>
+        <md-card-actions v-else>
+          <md-button v-if="true" @click="isDialogActive = true">consultation</md-button>
+          <md-button v-if="true" @click="$router.push('/chat')">chat</md-button>
+        </md-card-actions>
       </md-card>
+      <Dialog :active.sync="isDialogActive"></Dialog>
     </div>
     <div class="md-layout-item"></div>
   </div>
@@ -76,26 +82,36 @@
 
 <script lang="ts">
 import { User } from '@/store/auth/types';
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, PropSync, Vue } from 'vue-property-decorator';
 import { Action, Getter } from 'vuex-class';
+import Dialog from '@/components/Dialog.vue';
 
-
-@Component
+@Component({ components: {Dialog} })
 export default class Profile extends Vue {
+  
+  isDialogActive = false;
   
   @Action("getUser") actionGetUser: any;
   @Action("editUser") actionEditUser: any;
 
-  @Getter("user") user!: User;
+  @Getter("user") self!: User;
   
   isEditable = false;
+
+  user: User = new User('');
+
+  get isSelf(): boolean {
+    return this.user ? (this.$route.params.name === this.self.name) : false;
+  }
 
   onClickSave() {
     this.actionEditUser();
   }
 
-  created() {
-    this.actionGetUser();
+  async created() {
+    const resp = await this.actionGetUser(this.$route.params.name);
+    this.user = resp.data;
   }
+
 }
 </script>

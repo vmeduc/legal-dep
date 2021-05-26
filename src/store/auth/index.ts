@@ -78,15 +78,14 @@ export const auth: Module<AuthState, RootState> = {
         commit('setLoading', false);
       }
     },
-    async getUser({commit}) {
-      const user: User = store.getters.user;
+    async getUser({commit}, name: string) {
+      // const user: User = store.getters.user;
       commit('setLoading', true);
       try {
         const response: AxiosResponse<User> = await axios({
-          url: "/users/getUser/byUsername/".concat(user.name), 
+          url: `/users/getUser/byUsername/${name}`, 
           method: "GET",
         });
-        commit("setUser", response.data);
         return response;
       } finally {
         commit('setLoading', false);
@@ -125,6 +124,9 @@ export const auth: Module<AuthState, RootState> = {
   },
   getters: {
     isAuthenticated(store) {
+      console.log('status - ', store.status);
+      console.log('token - ', store.token);
+      console.log('user - ', store.user);
       return (store.status === "success" && store.token && store.user) ? true : false;
     },
     user(store) {

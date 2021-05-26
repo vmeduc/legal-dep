@@ -33,7 +33,7 @@ const routes: Array<RouteConfig> = [
     beforeEnter: permissionCheck,
   },
   {
-    path: '/profile',
+    path: '/profile/:name',
     name: 'Profile',
     component: Profile,
     beforeEnter: permissionCheck,
