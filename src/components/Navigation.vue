@@ -9,8 +9,11 @@
           <router-link to="/">
             <md-button>news</md-button>
           </router-link>
-          <router-link to="/legists">
+          <router-link to="/legists" v-if="userRole!=='LEGIST'">
             <md-button>legists</md-button>
+          </router-link>
+          <router-link to="/consults">
+            <md-button>consults</md-button>
           </router-link>
           <router-link to="/chat">
             <md-button>chat</md-button>
@@ -18,8 +21,8 @@
         </template>
       </div>
       <div class="md-toolbar-section-end">
-        <div v-if="isAuth" style="color: green;">
-          <h3>{{ userName }}</h3>
+        <div v-if="isAuth">
+          <span class="md-subheading" style="color: green;">{{ userName }}</span><sup v-if="userRole=='LEGIST'"> L</sup>
         </div>
         <div v-if="isAuth" style="margin-right: 2%;">
           <md-button class="md-icon-button" @click="$router.push(`/profile/${userName}`)">
@@ -46,7 +49,8 @@ import { User } from "@/store/auth/types";
 export default class Navigation extends Vue {
 
   @Getter("isAuthenticated") isAuth: any;
-  @Getter("user") user?: User;
+  @Getter("user") user!: User;
+  @Getter("role") userRole!: string;
 
   @Action("logout") actionLogout: any;
 

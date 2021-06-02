@@ -6,18 +6,18 @@
       <div class="md-layout" style="margin: 5%;">
         <div class="md-layout-item md-size-100" style="margin: 1%">
           <span class="md-headline" style="color: grey;">
-            Describe the topic and choose the time
+            Describe the topic and choose the date
           </span>
         </div>
         <div class="md-layout-item md-size-100">
           <md-field>
             <md-icon>subject</md-icon>
             <label>Subject</label>
-            <md-textarea md-autogrow type="text" v-model="request.request_text"></md-textarea>
+            <md-textarea md-autogrow type="text" v-model="req.request_text"></md-textarea>
           </md-field>
         </div>
         <div class="md-layout-item md-size-100">
-          <md-datepicker v-model="request.date">
+          <md-datepicker v-model="tmpDate">
             <label>Date</label>
           </md-datepicker>
         </div>
@@ -27,14 +27,14 @@
               <md-field>
                 <md-icon>schedule</md-icon>
                 <label>hours</label>
-                <md-input type="number" v-model="tmpDate.hours"></md-input>
+                <md-input type="number" :max="24" :min="1" :value="0"></md-input>
               </md-field>
             </div>
             <div class="md-layout-item md-size-50">
               <md-field>
                 <md-icon>schedule</md-icon>
                 <label>seconds</label>
-                <md-input type="number" v-model="tmpDate.seconds"></md-input>
+                <md-input type="number" :max="60" :min="0" :value="0"></md-input>
               </md-field>
             </div>
           </div>
@@ -58,35 +58,48 @@
 
 <script lang="ts">
 import { User } from "@/store/auth/types";
-import Vue from "vue";
-import { Component, PropSync } from "vue-property-decorator";
+import { Vue, Component, Prop, PropSync, Watch } from "vue-property-decorator";
 import { Action, Getter } from "vuex-class";
+import { Req } from "@/store/reqs/types";
+import { DateTime } from "luxon";
+
  
 @Component({ components: {} })
 export default class Dialog extends Vue {
   
   @PropSync('active') isDialogActive!: boolean;
+  @Prop() legist!: User;
 
   @Action('createRequest') actionCreateRequest: any;
+  @Action('getReqs') actionGetReqs: any;
 
   @Getter('user') user!: User;
+  @Getter('reqs') reqs!: Req[];
 
-  request = {
+  req: Req = new Req();
+  tmpDate: string = DateTime.now().toFormat('yyyy-LL-dd');
 
-  };
+  async created() {
+    this.req.userSpecialistId.name = this.legist.name;
+    this.req.request_text = 'Some req text2!';
+    this.req.meeting_time = DateTime.now().toFormat('yyyy-LL-dd'); // HH:mm:ss
+    await this.actionGetReqs();
+  }
 
-  tmpDate = {
-    hours: 0,
-    seconds: 0,
-  };
+  async onSubmit() {
+    // this.isDialogActive = false;
+    await this.actionCreateRequest(this.req);
 
-  onSubmit() {
-    this.request = {};
-    this.tmpDate.hours = 0;
-    this.tmpDate.seconds = 0;
     this.isDialogActive = false;
     alert('Request has been sent');
   }
+
+  @Watch('tmpDate', {immediate: true})
+  onMeetingDateChanged(newV: string) {
+    this.req.meeting_time = DateTime.fromISO(newV).toFormat('yyyy-LL-dd HH:mm:ss')
+  }
+
+
 
 }
 </script>

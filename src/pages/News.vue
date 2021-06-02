@@ -1,12 +1,12 @@
 <template>
   <div class="md-layout">
     <div class="md-layout-item"></div>
-    <div class="md-layout-item md-size-25">
-      <md-card>
-        <md-card-content>
-          <h2 style="text-align: center; color: green;">News</h2>
-        </md-card-content>
-      </md-card>
+    <div class="md-layout-item md-size-40">
+      <NewsItem></NewsItem>
+      <NewsItem></NewsItem>
+      <NewsItem></NewsItem>
+      <NewsItem></NewsItem>
+      <NewsItem></NewsItem>
     </div>
     <div class="md-layout-item"></div>
   </div>
@@ -14,8 +14,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import NewsItem from '@/components/NewsItem.vue';
 
-@Component
+@Component({ components: {NewsItem} })
 export default class News extends Vue {
 
 }

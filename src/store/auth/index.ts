@@ -7,7 +7,6 @@ import axios, { AxiosResponse } from 'axios';
 // import { getters } from './getters';
 
 import { User } from './types';
-import store from '..';
 
 export const state: AuthState = {
   token: localStorage.getItem("token"),
@@ -21,8 +20,9 @@ export const auth: Module<AuthState, RootState> = {
     preAuth({commit}) {
       const token = localStorage.getItem("token");
       const userName = localStorage.getItem("userName");
+      const role = localStorage.getItem("role");
       if (token && userName) {
-        const obj: AuthResponse = {role: 'some role', token: token, username: userName};
+        const obj: AuthResponse = {role: role ?? 'USER', token: token, username: userName};
         commit("authSuccess", obj);
       }
     },
@@ -96,27 +96,32 @@ export const auth: Module<AuthState, RootState> = {
     authSuccess(state, respData: AuthResponse) {
       state.status = "success";
       state.token = respData.token;
-      state.user = new User(respData.username);
+      state.user = new User(respData.username, respData.role);
       localStorage.setItem("token", respData.token);
       localStorage.setItem("userName", respData.username);
+      localStorage.setItem("role", respData.role);
       axios.defaults.headers.common["Authorization"] = `Bearer ${respData.token}`;
     },
     authError(state) {
       state.status = "error";
       localStorage.removeItem("token");
       localStorage.removeItem("userName");
+      localStorage.removeItem("role");
+
     },
     authLogout(state) {
       state.token = null;
       state.status = undefined;
       localStorage.removeItem("token");
       localStorage.removeItem("userName");
+      localStorage.removeItem("role");
     },
     authLogoutError(state) {
       state.token = null;
       state.status = undefined;
       localStorage.removeItem("token");
       localStorage.removeItem("userName");
+      localStorage.removeItem("role");
     },
     setUser(state, user: User) {
       state.user = user;
@@ -124,10 +129,28 @@ export const auth: Module<AuthState, RootState> = {
   },
   getters: {
     isAuthenticated(store) {
-      console.log('status - ', store.status);
-      console.log('token - ', store.token);
-      console.log('user - ', store.user);
-      return (store.status === "success" && store.token && store.user) ? true : false;
+      // console.log('status - ', store.status);
+      // console.log('token - ', store.token);
+      // console.log('user - ', store.user);
+      let status;
+      let token;
+      let user;
+      if (store.status === "success" || localStorage.getItem("status") === "success") {
+        status = true;
+      }
+      if (Boolean(store.token) || Boolean(localStorage.getItem("token"))) {
+        token = true;
+      }
+      if (Boolean(store.user) || Boolean(localStorage.getItem("userName"))) {
+        user = true;
+      }
+      console.log('in isAuth: ', status, token, user);
+      return (status && token && user);
+    },
+    role(store) {
+      const storageRole: string|null = localStorage.getItem('role');
+      return store.user ? store.user.roles.pop() : 
+        storageRole ? storageRole : 'USER';
     },
     user(store) {
       return store.user;

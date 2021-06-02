@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Dialog :active.sync="isDialogActive"></Dialog>
+    <Dialog 
+        :active.sync="isDialogActive"
+        :legist="legist"
+    />
     <md-card md-with-hover>
       <md-ripple>
         <div @click="$router.push(`/profile/${legist.name}`)">
@@ -15,8 +18,8 @@
           </md-card-header>
         </div>
         <md-card-actions>
-          <md-button @click="isDialogActive = true">Consultation</md-button>
-          <md-button @click="$router.push('/chat')">Chat</md-button>
+          <md-button @click="isDialogActive = true">consult</md-button>
+          <md-button @click="$router.push('/chat')">chat</md-button>
         </md-card-actions>
       </md-ripple>
     </md-card>

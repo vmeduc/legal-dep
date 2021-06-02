@@ -1,11 +1,12 @@
-import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
+import Vue from 'vue';
+import VueRouter, { RouteConfig } from 'vue-router';
 
-import News from '../pages/News.vue'
-import Legists from '../pages/Legists.vue'
+import News from '../pages/News.vue';
+import Legists from '../pages/Legists.vue';
 import Auth from '../pages/Auth.vue';
 import Chat from '../pages/Chat.vue';
 import Profile from '../pages/Profile.vue';
+import Consults from '../pages/Consults.vue';
 import { permissionCheck } from './access';
 
 Vue.use(VueRouter)
@@ -54,6 +55,12 @@ const routes: Array<RouteConfig> = [
     path: '/registration',
     name: 'Registration',
     component: Auth,
+  },
+  {
+    path: '/consults/',
+    name: 'Consults',
+    component: Consults,
+    beforeEnter: permissionCheck,
   },
 ]
 

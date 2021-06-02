@@ -70,7 +70,7 @@
           <md-button v-if="isEditable" @click="onClickSave">save</md-button>
         </md-card-actions>
         <md-card-actions v-else>
-          <md-button v-if="true" @click="isDialogActive = true">consultation</md-button>
+          <md-button v-if="userRole==='USER'" @click="isDialogActive = true">consultation</md-button>
           <md-button v-if="true" @click="$router.push('/chat')">chat</md-button>
         </md-card-actions>
       </md-card>
@@ -95,6 +95,8 @@ export default class Profile extends Vue {
   @Action("editUser") actionEditUser: any;
 
   @Getter("user") self!: User;
+  @Getter("role") userRole!: string;
+
   
   isEditable = false;
 
@@ -106,6 +108,7 @@ export default class Profile extends Vue {
 
   onClickSave() {
     this.actionEditUser();
+    this.isEditable = false;
   }
 
   async created() {

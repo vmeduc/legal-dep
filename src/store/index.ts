@@ -4,6 +4,7 @@ import { RootState } from './types';
 
 import { auth } from './auth';
 import { legists } from './legists';
+import { reqs } from './reqs';
 
 
 Vue.use(Vuex)
@@ -29,6 +30,7 @@ const store: StoreOptions<RootState> = {
   modules: {
     auth,
     legists, 
+    reqs,
   },
 };
 
